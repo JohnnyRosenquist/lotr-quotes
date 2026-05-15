@@ -1,6 +1,3 @@
-export default function Quote({quote}) {
-    return
-    (
-        <div>{quote}</div>
-    )
+export default function Quote({ quote }) {
+  return <div>{quote}</div>;
 }
