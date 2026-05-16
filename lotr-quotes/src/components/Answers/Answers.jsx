@@ -1,12 +1,13 @@
 import ListGroup from "react-bootstrap/ListGroup"
 import { useState } from "react";
 
-export default function Answers({ alternatives }) {
+export default function Answers({ alternatives, updateSelected }) {
 
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
     function setActive(answer) {
-        setSelectedAnswer(answer);
+      setSelectedAnswer(answer);
+      updateSelected(answer)
     }
 
     function isActive(answer) {

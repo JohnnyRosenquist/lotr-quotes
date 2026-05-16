@@ -12,7 +12,7 @@ export default function ScoreCard({ score }) {
         </Col>
         <Col xs={12} sm={6}>
           <span className="ms-auto">
-            Total questions answered: {score.questionsAnswered}{" "}
+            Total questions answered: {score.questionsAnswered}
           </span>
         </Col>
       </Row>
