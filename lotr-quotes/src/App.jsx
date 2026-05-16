@@ -6,10 +6,23 @@ import Container from "react-bootstrap/Container";
 import { fetchRandomQuote, getAnswerAlternatives } from "./api/lotrapi";
 import { useState, useEffect } from "react";
 
-const placeholderScore = { score: "1", questionsAnswered: "5" };
-
 function App() {
-  const [currentQuestion, setCurrentQuestion] = useState(undefined);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [score, setScore] = useState({ points: 0, questionsAnswered: 0 });
+
+  function updateScore(numPoints) {
+    if (numPoints) {
+      setScore((s) => ({
+        points: s.points + numPoints,
+        questionsAnswered: s.questionsAnswered + 1,
+      }));
+    } else {
+      setScore((s) => ({
+        points: s.points,
+        questionsAnswered: s.questionsAnswered + 1,
+      }));
+    }
+  }
 
   async function loadQuestion() {
     const currQuote = await fetchRandomQuote();
@@ -24,9 +37,13 @@ function App() {
     <Container>
       <Stack>
         <h1>LOTR - Who said it?</h1>
-        <ScoreCard score={placeholderScore} />
-        <QuestionCard question={currentQuestion} />
-        <Button>Restart</Button>
+        <ScoreCard score={score} />
+        <QuestionCard question={currentQuestion} updateScore={updateScore} />
+        {currentQuestion ? (
+          <Button>Restart</Button>
+        ) : (
+          <Button onClick={() => loadQuestion()}>Start</Button>
+        )}
       </Stack>
     </Container>
   );
