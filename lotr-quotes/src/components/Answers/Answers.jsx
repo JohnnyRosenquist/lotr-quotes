@@ -16,7 +16,7 @@ export default function Answers({ alternatives }) {
   return (
     <ListGroup className="pt-2" horizontal="md">
       {alternatives.map((alt) => {
-          return <ListGroup.Item active={isActive(alt)} onClick={() =>  {setActive(alt)}}>{alt}</ListGroup.Item>;
+        return <ListGroup.Item key={alt.id} active={isActive(alt.id)} onClick={() =>  {setActive(alt.id)}}>{alt.name}</ListGroup.Item>;
       })}
     </ListGroup>
   );
