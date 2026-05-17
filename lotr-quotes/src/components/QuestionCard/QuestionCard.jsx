@@ -3,20 +3,24 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 import Quote from "../Quote/Quote";
 import { useState } from "react";
 
-export default function QuestionCard({ question, updateScore }) {
-  const [selected, setSelected] = useState(" ");
+export default function QuestionCard({ question, updateScore, loadQuestion }) {
+  const [selected, setSelected] = useState(null);
+  const [disabled, setDisabled] = useState(true);
 
   function updateSelected(choice) {
+    setDisabled(false);
     setSelected(choice);
   }
 
   function grade() {
-    if (selected && selected === question.quote.character) {
-      updateScore(1);
-      console.log("Correct");
-    } else {
-      updateScore(0);
-      console.log("InCorrect");
+    if (selected) {
+      setDisabled(true);
+      if (selected === question.quote.character) {
+        updateScore(1);
+      } else {
+        updateScore(0);
+      }
+      loadQuestion();
     }
   }
 
@@ -28,7 +32,7 @@ export default function QuestionCard({ question, updateScore }) {
           alternatives={question.alternatives}
           updateSelected={updateSelected}
         />
-        <SubmitButton grade={grade} />
+        <SubmitButton disabled={disabled} grade={grade} />
       </>
     );
   }
