@@ -16,7 +16,6 @@ export async function fetchRandomQuote() {
 }
 
 export async function fetchCharacters() {
-  console.log("fetched characters");
   const response = await fetch(`${baseUrl}character/`, {
     headers: {
       Authorization: `Bearer ${auth}`,
@@ -26,10 +25,15 @@ export async function fetchCharacters() {
   return characterArray.docs;
 }
 
-export function getAnswerAlternatives(correct) {
-  const correctCharacter = characterArray.find((char) => char._id === correct);
+export function addPlainTextName(question) {
+  const plainText = characterArray.find(
+    (char) => char._id === question.characterId,
+  );
+  question.name = plainText.name;
+}
 
-  const character = { name: correctCharacter.name, id: correctCharacter._id };
+export function getAnswerAlternatives(question) {
+  const character = { name: question.name, id: question.characterId };
   const answers = [character];
   while (answers.length < 4) {
     const currChar =

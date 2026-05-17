@@ -3,9 +3,12 @@ import QuestionCard from "./components/QuestionCard/QuestionCard";
 import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { fetchRandomQuote, getAnswerAlternatives } from "./api/lotrapi";
+import {
+  fetchRandomQuote,
+  getAnswerAlternatives,
+  addPlainTextName,
+} from "./api/lotrapi";
 import { useState, useEffect, createContext } from "react";
-import "./App.css";
 
 export const GameContext = createContext();
 
@@ -39,9 +42,14 @@ function App() {
 
   async function loadQuestion() {
     const currQuote = await fetchRandomQuote();
-    const currAlternatives = await getAnswerAlternatives(currQuote.characterId);
+    addPlainTextName(currQuote);
+    const currAlternatives = await getAnswerAlternatives(currQuote);
     setCurrentQuestion({
-      quote: { phrase: currQuote.quote, character: currQuote.characterId },
+      quote: {
+        phrase: currQuote.quote,
+        characterId: currQuote.characterId,
+        characterName: currQuote.name,
+      },
       alternatives: currAlternatives,
     });
   }
