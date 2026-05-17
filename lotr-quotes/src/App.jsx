@@ -4,11 +4,19 @@ import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { fetchRandomQuote, getAnswerAlternatives } from "./api/lotrapi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
+import "./App.css";
+
+export const GameContext = createContext();
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [score, setScore] = useState({ points: 0, questionsAnswered: 0 });
+  const [playing, setPlaying] = useState(false);
+
+  function togglePlaying() {
+    setPlaying((prevPlaying) => !prevPlaying);
+  }
 
   function updateScore(numPoints) {
     if (numPoints) {
@@ -24,6 +32,11 @@ function App() {
     }
   }
 
+  async function startGame() {
+    togglePlaying();
+    loadQuestion();
+  }
+
   async function loadQuestion() {
     const currQuote = await fetchRandomQuote();
     const currAlternatives = await getAnswerAlternatives(currQuote.characterId);
@@ -34,18 +47,24 @@ function App() {
   }
 
   return (
-    <Container>
-      <Stack>
-        <h1>LOTR - Who said it?</h1>
-        <ScoreCard score={score} />
-        <QuestionCard question={currentQuestion} updateScore={updateScore} />
-        {currentQuestion ? (
-          <Button>Restart</Button>
-        ) : (
-          <Button onClick={() => loadQuestion()}>Start</Button>
-        )}
-      </Stack>
-    </Container>
+    <GameContext.Provider value={playing}>
+      <Container>
+        <Stack>
+          <h1>LOTR - Who said it?</h1>
+          <ScoreCard score={score} />
+          <QuestionCard
+            question={currentQuestion}
+            updateScore={updateScore}
+            loadQuestion={loadQuestion}
+          />
+          {currentQuestion ? (
+            <Button onClick={() => window.location.reload()}>End</Button>
+          ) : (
+            <Button onClick={() => startGame()}>Start</Button>
+          )}
+        </Stack>
+      </Container>
+    </GameContext.Provider>
   );
 }
 
