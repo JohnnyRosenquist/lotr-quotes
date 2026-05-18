@@ -5,6 +5,9 @@ import Col from "react-bootstrap/Col";
 import { useContext } from "react";
 import { GameContext } from "../../App";
 
+/**
+ * Component used for displaying the number of points and answered questions
+ */
 export default function ScoreCard({ score }) {
   const playing = useContext(GameContext);
 

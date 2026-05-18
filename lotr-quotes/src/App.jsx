@@ -13,15 +13,24 @@ import "./App.css";
 
 export const GameContext = createContext();
 
+/**
+ * Houses the main structure of the game, including the overarching logic, GameContext and game related states.
+ */
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [score, setScore] = useState({ points: 0, questionsAnswered: 0 });
   const [playing, setPlaying] = useState(false);
 
+  /**
+   * State used for GameContext
+   */
   function togglePlaying() {
     setPlaying((prevPlaying) => !prevPlaying);
   }
 
+  /**
+   * Updates the scores displayed in the ScoreCard
+   */
   function updateScore(numPoints) {
     if (numPoints) {
       setScore((s) => ({
@@ -36,11 +45,17 @@ function App() {
     }
   }
 
+  /**
+   * Starts the game, awaits the API responses prior to toggling the playing state to true
+   */
   async function startGame() {
     await loadQuestion();
     togglePlaying();
   }
 
+  /**
+   * Creates question objects and sets is as the currentQuestion
+   */
   async function loadQuestion() {
     const currQuote = await fetchRandomQuote();
     addPlainTextName(currQuote);
