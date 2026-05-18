@@ -9,6 +9,7 @@ import {
   addPlainTextName,
 } from "./api/lotrapi";
 import { useState, useEffect, createContext } from "react";
+import "./App.css";
 
 export const GameContext = createContext();
 
@@ -36,8 +37,8 @@ function App() {
   }
 
   async function startGame() {
+    await loadQuestion();
     togglePlaying();
-    loadQuestion();
   }
 
   async function loadQuestion() {
@@ -56,9 +57,11 @@ function App() {
 
   return (
     <GameContext.Provider value={playing}>
-      <Container>
-        <Stack>
-          <h1>LOTR - Who said it?</h1>
+      <Container id="container" className=" shadow rounded mt-4 pb-3">
+        <Stack className="h-100">
+          <header className="text-center m-2">
+            <h1>LOTR - Who said it?</h1>
+          </header>
           <ScoreCard score={score} />
           <QuestionCard
             question={currentQuestion}
@@ -66,9 +69,21 @@ function App() {
             loadQuestion={loadQuestion}
           />
           {currentQuestion ? (
-            <Button onClick={() => window.location.reload()}>End</Button>
+            <Button
+              variant="success"
+              onClick={() => window.location.reload()}
+              className="mx-auto col-lg-4 col-md-6 col-sm-8 col-9"
+            >
+              End
+            </Button>
           ) : (
-            <Button onClick={() => startGame()}>Start</Button>
+            <Button
+              variant="success"
+              className="my-auto mx-auto col-lg-4 col-md-6 col-sm-8 col-9"
+              onClick={() => startGame()}
+            >
+              Start
+            </Button>
           )}
         </Stack>
       </Container>

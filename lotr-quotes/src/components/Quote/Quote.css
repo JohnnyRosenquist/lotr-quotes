@@ -1,0 +1,6 @@
+#quote {
+  background-color: whitesmoke;
+  border: 2px solid rgba(0, 128, 0, 0.116);
+  height: 15vh;
+  overflow-y: auto;
+}
