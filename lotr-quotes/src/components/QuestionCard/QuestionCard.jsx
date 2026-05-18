@@ -44,15 +44,21 @@ export default function QuestionCard({ question, updateScore, loadQuestion }) {
 
   if (question) {
     return (
-      <>
+      <div style={{ height: "60vh" }}>
         <Quote quote={question.quote.phrase} />
         <Answers
           alternatives={question.alternatives}
           updateSelected={updateSelected}
         />
-        <SubmitButton disabled={disabled} grade={grade} />
+        <div className="d-flex justify-content-center">
+          <SubmitButton disabled={disabled} grade={grade} />
+        </div>
         {isOpen && (
-          <FloatingOverlay className="Dialog-overlay" lockScroll>
+          <FloatingOverlay
+            className="Dialog-overlay"
+            lockScroll
+            style={{ paddingTop: "20vh" }}
+          >
             <FloatingFocusManager context={context} modal>
               <Dialog
                 answer={selected}
@@ -62,7 +68,7 @@ export default function QuestionCard({ question, updateScore, loadQuestion }) {
             </FloatingFocusManager>
           </FloatingOverlay>
         )}
-      </>
+      </div>
     );
   }
 }

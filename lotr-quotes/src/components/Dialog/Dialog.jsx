@@ -3,13 +3,21 @@ import Button from "react-bootstrap/esm/Button";
 
 export default function Dialog({ answer, correct, nextQuestion }) {
   return (
-    <Card>
+    <Card
+      className="text-center p-2"
+      style={{ width: "60vw", backgroundColor: "#d8cacaf5" }}
+    >
       {answer === correct.quote.characterId ? (
         <p>Correct answer!</p>
       ) : (
-        <p>The correct answer was: {correct.quote.characterName}</p>
+        <p>
+          The correct answer was:{" "}
+          <span className="fst-italic">{correct.quote.characterName}</span>
+        </p>
       )}
-      <Button onClick={nextQuestion}>Next question</Button>
+      <Button variant="success" onClick={nextQuestion}>
+        Next question
+      </Button>
     </Card>
   );
 }

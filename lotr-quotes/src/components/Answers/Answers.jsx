@@ -1,5 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import { useState } from "react";
+import "./Answers.css";
 
 export default function Answers({ alternatives, updateSelected }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -14,10 +15,11 @@ export default function Answers({ alternatives, updateSelected }) {
   }
 
   return (
-    <ListGroup className="pt-2" horizontal="md">
+    <ListGroup id="answerList" className="pt-2 flexbox" horizontal="md">
       {alternatives.map((alt) => {
         return (
           <ListGroup.Item
+            className="flex-fill text-center"
             key={alt.id}
             active={isActive(alt.id)}
             onClick={() => {

@@ -14,11 +14,13 @@ export default function ScoreCard({ score }) {
       <Row>
         {playing && (
           <>
-            <Col xs={12} sm={6}>
-              <span>Current points: {score.points} </span>
+            <Col md={6} xs={12} className="d-flex">
+              <span className="score text-center flex-md-fill">
+                Current points: {score.points}{" "}
+              </span>
             </Col>
-            <Col xs={12} sm={6}>
-              <span className="ms-auto">
+            <Col md={6} xs={12} className="d-flex">
+              <span className="score text-center flex-md-fill">
                 Total questions answered: {score.questionsAnswered}
               </span>
             </Col>
