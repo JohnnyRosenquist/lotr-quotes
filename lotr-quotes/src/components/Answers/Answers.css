@@ -1,0 +1,10 @@
+#answerList .list-group-item.active {
+  box-sizing: border-box;
+  background-color: rgba(231, 163, 15, 0.774);
+  color: black;
+  border-color: rgba(245, 178, 33, 0.267);
+}
+
+#answerList {
+  cursor: pointer;
+}
