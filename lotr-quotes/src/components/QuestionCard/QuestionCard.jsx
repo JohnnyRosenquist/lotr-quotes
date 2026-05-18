@@ -11,6 +11,9 @@ import {
 } from "@floating-ui/react";
 import "./QuestionCard.css";
 
+/**
+ * Container component housing the question components and grading logic, triggers an overlay upon submitting answers
+ */
 export default function QuestionCard({ question, updateScore, loadQuestion }) {
   const [selected, setSelected] = useState(null);
   const [disabled, setDisabled] = useState(true);

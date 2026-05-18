@@ -1,6 +1,10 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 
+
+/**
+ * Component displayed when submitting an answer, presents the correct answer to the player. 
+ */
 export default function Dialog({ answer, correct, nextQuestion }) {
   return (
     <Card
