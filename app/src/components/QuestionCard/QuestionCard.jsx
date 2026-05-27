@@ -57,11 +57,7 @@ export default function QuestionCard({ question, updateScore, loadQuestion }) {
           <SubmitButton disabled={disabled} grade={grade} />
         </div>
         {isOpen && (
-          <FloatingOverlay
-            className="Dialog-overlay"
-            lockScroll
-            style={{ paddingTop: "20vh" }}
-          >
+          <FloatingOverlay className="Dialog-overlay z-3" lockScroll>
             <FloatingFocusManager context={context} modal>
               <Dialog
                 answer={selected}

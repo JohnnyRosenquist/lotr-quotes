@@ -1,0 +1,12 @@
+.Dialog-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  display: grid;
+  place-items: center;
+  padding-top: 45vh;
+}
+
+@media (min-width: 769px) {
+  .Dialog-overlay {
+    padding-top: 10vh;
+  }
+}

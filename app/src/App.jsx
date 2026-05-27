@@ -1,4 +1,5 @@
 import ScoreCard from "./components/ScoreCard/ScoreCard";
+import Summary from "./components/Summary/Summary"
 import QuestionCard from "./components/QuestionCard/QuestionCard";
 import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
@@ -20,12 +21,20 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [score, setScore] = useState({ points: 0, questionsAnswered: 0 });
   const [playing, setPlaying] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
 
   /**
    * State used for GameContext
    */
   function togglePlaying() {
     setPlaying((prevPlaying) => !prevPlaying);
+  }
+
+  /**
+   * State used for displaying game summary
+   */
+  function toggleShowSummary() {
+    setShowSummary((precShowSummary) => !precShowSummary);
   }
 
   /**
@@ -83,10 +92,11 @@ function App() {
             updateScore={updateScore}
             loadQuestion={loadQuestion}
           />
+          {showSummary && <Summary score={score} toggleShowSummary={toggleShowSummary} />}
           {currentQuestion ? (
             <Button
               variant="success"
-              onClick={() => window.location.reload()}
+              onClick={() => toggleShowSummary()}
               className="mx-auto col-lg-4 col-md-6 col-sm-8 col-9"
             >
               End

@@ -10,7 +10,7 @@ Node:
 1. Download and install from https://nodejs.org/en#download
 
 #### Installing dependencies
-1. Open a terminal and navigate to the root folder of the project.
+1. Open a terminal and navigate to the "app" folder of the project.
 
 2. Ensure that node is installed by running the version command:
 ```
